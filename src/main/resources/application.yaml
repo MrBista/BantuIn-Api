@@ -1,0 +1,21 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: "exercies"
+
+  datasource:
+      username: "belajar_jdbc"
+      password: "belajar_jdbc"
+      jdbc-url: "jdbc:mysql://localhost:4000/belajar_jdbc"
+      maximum-pool-size: "30"
+
+management:
+  server:
+    port: 9001
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
