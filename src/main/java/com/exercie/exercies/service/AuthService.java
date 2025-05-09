@@ -1,10 +1,12 @@
 package com.exercie.exercies.service;
 
+import com.exercie.exercies.dao.UserDao;
 import com.exercie.exercies.dao.UserDaoImpl;
 import com.exercie.exercies.dto.request.UserDtoReq;
 import com.exercie.exercies.dto.response.UserDtoRes;
 import com.exercie.exercies.mapper.UserMapper;
 import com.exercie.exercies.model.User;
+import com.exercie.exercies.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,16 @@ import java.util.Map;
 @Service
 public class AuthService {
     Logger logger = LoggerFactory.getLogger(AuthService.class);
-    private final UserDaoImpl userDaoImpl;
+    private final UserDao userDaoImpl;
     private final UserMapper userMapper;
 
+    private final UserRepository userRepository;
+
     @Autowired
-    public AuthService(@Qualifier("userDaoImpl") UserDaoImpl userDaoImpl, UserMapper userMapper) {
+    public AuthService(@Qualifier("userDaoImpl") UserDaoImpl userDaoImpl, UserMapper userMapper, UserRepository userRepository) {
         this.userDaoImpl = userDaoImpl;
         this.userMapper = userMapper;
+        this.userRepository = userRepository;
     }
 
     public List<UserDtoRes> getAllUser(){
@@ -53,6 +58,16 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
         }
         return userMapper.toDto(userDtoRes);
+    }
+
+
+    @Transactional
+    public void registerUser(UserDtoReq userDtoReq){
+        // register user
+        // cek dulu email atau username udah ada atau belum
+
+        userDaoImpl
+                .findByUsernameOrEmail(userDtoReq.getUsername(), userDtoReq.getEmail());
     }
 
 

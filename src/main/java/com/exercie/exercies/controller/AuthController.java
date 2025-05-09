@@ -44,4 +44,10 @@ public class AuthController {
     }
 
 
+    @PostMapping
+    public ResponseEntity<?> registerUser(@RequestBody UserDtoReq userDtoReq){
+        authService.registerUser(userDtoReq);
+        return null;
+    }
+
 }

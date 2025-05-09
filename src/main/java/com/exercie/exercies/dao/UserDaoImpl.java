@@ -5,24 +5,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class UserDaoImpl implements UserDao{
     Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
     private final JdbcTemplate jdbcTemplate;
     private final DataSource dataSource;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
-    public UserDaoImpl(JdbcTemplate jdbcTemplate, DataSource dataSource) {
+    public UserDaoImpl(JdbcTemplate jdbcTemplate, DataSource dataSource, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.dataSource = dataSource;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     @Override
@@ -101,6 +103,33 @@ public class UserDaoImpl implements UserDao{
 
     }
 
+    @Override
+    public Optional<User> findByUsername(String username) {
+        String query = """
+                    SELECT * FROM user
+                    where username = :username
+                """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("username", username);
+        User user = namedParameterJdbcTemplate.queryForObject(query, params, userRowMapper);
+        return Optional.ofNullable(user);
+    }
+
+    @Override
+    public Optional<User> findByUsernameOrEmail(String username, String email) {
+        String query = """
+                    SELECT * FROM user
+                    where username = :username or email = :email
+                """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("username", username);
+        params.put("email", email);
+        User user = namedParameterJdbcTemplate.queryForObject(query, params, userRowMapper);
+        return Optional.ofNullable(user);
+    }
+
     private User mapRowToUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getLong("id"));
@@ -110,4 +139,15 @@ public class UserDaoImpl implements UserDao{
         user.setPassword(rs.getString("password"));
         return user;
     }
+
+
+    private final RowMapper<User> userRowMapper = (rs, i) ->{
+        User user = new User();
+        user.setId(rs.getLong("id"));
+        user.setUsername(rs.getString("username"));
+        user.setPassword(rs.getString("password"));
+        user.setEmail(rs.getString("email"));
+        user.setName(rs.getString("name"));
+        return user;
+    };
 }
