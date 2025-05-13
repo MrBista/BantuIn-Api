@@ -4,9 +4,13 @@ import com.exercie.exercies.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -72,29 +76,30 @@ public class UserDaoImpl implements UserDao{
     @Override
     public void saveUser(User user) {
         String sql = """
-                    INSERT INTO users(email, username, name, password) values(?, ?, ?, ?)
-                """ ;
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ){
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getUsername());
-            ps.setString(3, user.getName());
-            ps.setString(4, user.getPassword());
-            int arrowAffacted = ps.executeUpdate();
-            if (arrowAffacted == 0){
-                throw new SQLException("now row affected");
-            }
-            try (ResultSet rs = ps.getGeneratedKeys()){
-                if (rs.next()){
-                    user.setId(rs.getLong(1));
-                }else {
-                    throw new SQLException("Creating product failed, no id obtained");
-                }
-            }
-        }catch (SQLException e){
-            logger.error("error sql {} ", e.getMessage());
-            throw new RuntimeException("Something went wrong in save user");
+            INSERT INTO users (email, username, name, password, created_at)
+            VALUES (:email, :username, :name, :password, :createdAt)
+        """;
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("email", user.getEmail());
+        params.addValue("username", user.getUsername());
+        params.addValue("name", user.getName());
+        params.addValue("password", user.getPassword());
+        params.addValue("createdAt", user.getCreatedAt());
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        int affected = namedParameterJdbcTemplate.update(sql, params, keyHolder, new String[]{"id"});
+
+        if (affected == 0) {
+            throw new RuntimeException("Failed to insert user");
+        }
+
+        Number generatedId = keyHolder.getKey();
+        if (generatedId != null) {
+            user.setId(generatedId.longValue());
+        } else {
+            throw new RuntimeException("Failed to retrieve generated user ID");
         }
     }
 
@@ -106,7 +111,7 @@ public class UserDaoImpl implements UserDao{
     @Override
     public Optional<User> findByUsername(String username) {
         String query = """
-                    SELECT * FROM user
+                    SELECT * FROM users
                     where username = :username
                 """;
 
@@ -119,15 +124,19 @@ public class UserDaoImpl implements UserDao{
     @Override
     public Optional<User> findByUsernameOrEmail(String username, String email) {
         String query = """
-                    SELECT * FROM user
+                    SELECT id, username, password, email, name  FROM users
                     where username = :username or email = :email
                 """;
 
         Map<String, Object> params = new HashMap<>();
         params.put("username", username);
         params.put("email", email);
-        User user = namedParameterJdbcTemplate.queryForObject(query, params, userRowMapper);
-        return Optional.ofNullable(user);
+        try {
+            User user = namedParameterJdbcTemplate.queryForObject(query, params, userRowMapper);
+            return Optional.ofNullable(user);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     private User mapRowToUser(ResultSet rs) throws SQLException {
@@ -142,12 +151,16 @@ public class UserDaoImpl implements UserDao{
 
 
     private final RowMapper<User> userRowMapper = (rs, i) ->{
+        // id, username, password, email, name
         User user = new User();
         user.setId(rs.getLong("id"));
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password"));
         user.setEmail(rs.getString("email"));
         user.setName(rs.getString("name"));
+//        if (rs.getTimestamp("created_at") != null){
+//            user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+//        }
         return user;
     };
 }

@@ -1,5 +1,6 @@
 package com.exercie.exercies.exception;
 
+import org.apache.coyote.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.naming.AuthenticationException;
+import java.nio.file.AccessDeniedException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +24,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> generateResponseNotFound(Exception e){
         return generateResponseError(e.getMessage(), "Resources Not Found", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<?> generateResponseNotFound(BadRequestException e){
+        return generateResponseError(e.getMessage(), "Bad request", HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<?> generateResponseError(Object errors, String message, HttpStatus status){

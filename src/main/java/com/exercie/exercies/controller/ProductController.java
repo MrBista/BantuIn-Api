@@ -18,6 +18,7 @@ public class ProductController {
 
     @GetMapping()
     public ResponseEntity<?> getAllProduct(){
+        System.out.println("masuk sini");
 
         return CommonResponse
                 .generateResponse(productService.getAllProduct(),

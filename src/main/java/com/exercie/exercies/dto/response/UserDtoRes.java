@@ -1,10 +1,17 @@
 package com.exercie.exercies.dto.response;
 
+import com.exercie.exercies.model.Role;
+
+import java.util.List;
+
 public class UserDtoRes {
     private Long id;
     private String email;
     private String username;
     private String name;
+
+    private List<Role> roles;
+
 
     public UserDtoRes() {
     }

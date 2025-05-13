@@ -7,6 +7,33 @@ create table users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE roles (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    description VARCHAR(255)
+);
+
+CREATE TABLE user_roles (
+    user_id BIGINT NOT NULL,
+    role_id BIGINT NOT NULL,
+    PRIMARY KEY (user_id, role_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
+);
+
+CREATE TABLE profiles (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    profile_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE user_profiles (
+    user_id BIGINT NOT NULL,
+    profile_id BIGINT NOT NULL,
+    PRIMARY KEY (user_id, profile_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
+);
+
 -- Second statement: create categories table
 create table categories (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -27,3 +54,9 @@ create table products (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
+
+
+create index idx_users_username on users(username);
+create index idx_users_email on users(email);
+create index idx_categories_name on categories(name);
+create index idx_products_category_id on products(category_id);

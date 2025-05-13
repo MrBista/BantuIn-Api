@@ -1,0 +1,18 @@
+services:
+  ecommerce_db:
+    container_name: ecommerce_db
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: belajar_jdbc_root_passwd
+      MYSQL_DATABASE: belajar_jdbc
+      MYSQL_USER: belajar_jdbc
+      MYSQL_PASSWORD: belajar_jdbc
+    volumes:
+      - ecommerce_volume:/var/lib/mysql
+    ports:
+      - 4001:3306
+
+
+volumes:
+  ecommerce_volume:
+    name: ecommerce_volume

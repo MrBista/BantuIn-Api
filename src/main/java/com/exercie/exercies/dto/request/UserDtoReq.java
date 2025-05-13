@@ -1,10 +1,28 @@
 package com.exercie.exercies.dto.request;
 
+import jakarta.validation.constraints.*;
+
 public class UserDtoReq {
     private Long id;
+
+
+    @NotNull(message = "email must filled")
+    @NotBlank(message = "email must not empty")
+    @Email(message = "format email not valid")
     private String email;
+
+
+    @NotNull(message = "username must filled")
+    @NotBlank(message = "username must not empty")
     private String username;
+
+
+    @NotNull(message = "name must filled")
+    @NotBlank(message = "name must not empty")
     private String name;
+
+    @NotNull(message = "password must filled")
+    @NotBlank(message = "password must not empty")
     private String password;
 
     public UserDtoReq() {

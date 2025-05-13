@@ -8,7 +8,7 @@ spring:
   datasource:
       username: "belajar_jdbc"
       password: "belajar_jdbc"
-      jdbc-url: "jdbc:mysql://localhost:4000/belajar_jdbc"
+      jdbc-url: "jdbc:mysql://localhost:4001/belajar_jdbc"
       maximum-pool-size: "30"
 
 management:
@@ -19,3 +19,9 @@ management:
       exposure:
         include: "*"
         exclude: "env,beans"
+
+
+logging.level:
+  org.springframework.security: TRACE
+  org.springframework.web: TRACE
+  org.springframework.jdbc: DEBUG

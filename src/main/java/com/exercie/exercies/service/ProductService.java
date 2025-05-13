@@ -49,6 +49,8 @@ public class ProductService {
                 })
                 .toList();
 
+        logger.info("list user {}", productDtoRes);
+
         return productDtoRes;
     }
 

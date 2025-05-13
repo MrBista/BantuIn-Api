@@ -1,7 +1,10 @@
 package com.exercie.exercies.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.time.LocalDateTime;
 
 @Table("users")
 public class User {
@@ -12,17 +15,20 @@ public class User {
     private String username;
     private String password;
     private String email;
+    @Column("created_at")
+    private LocalDateTime createdAt;
 
 
     public User() {
     }
 
-    public User(Long id, String name, String username, String password, String email) {
+    public User(Long id, String name, String username, String password, String email, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -65,14 +71,23 @@ public class User {
         this.email = email;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                "createdAt=" + createdAt +
                 ", email='" + email + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }

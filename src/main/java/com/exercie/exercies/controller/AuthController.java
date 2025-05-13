@@ -5,6 +5,8 @@ import com.exercie.exercies.dto.response.CommonResponse;
 import com.exercie.exercies.dto.response.UserDtoRes;
 import com.exercie.exercies.model.User;
 import com.exercie.exercies.service.AuthService;
+import jakarta.validation.Valid;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,10 +46,10 @@ public class AuthController {
     }
 
 
-    @PostMapping
-    public ResponseEntity<?> registerUser(@RequestBody UserDtoReq userDtoReq){
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody UserDtoReq userDtoReq) throws BadRequestException {
         authService.registerUser(userDtoReq);
-        return null;
+        return CommonResponse.generateResponse(userDtoReq, "success", HttpStatus.CREATED);
     }
 
 }
