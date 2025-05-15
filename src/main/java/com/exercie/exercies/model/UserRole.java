@@ -1,16 +1,22 @@
 package com.exercie.exercies.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table
+import java.util.List;
+
+@Table("user_roles")
 public class UserRole {
 
     @Column("user_id")
     private Long userId;
     @Column("role_id")
     private Long roleId;
+
+    @Transient
+    private Role role;
 
     public UserRole() {
     }
@@ -36,6 +42,15 @@ public class UserRole {
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 
     @Override
     public String toString() {

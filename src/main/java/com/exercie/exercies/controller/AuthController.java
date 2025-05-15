@@ -1,9 +1,10 @@
 package com.exercie.exercies.controller;
 
+import com.exercie.exercies.dto.request.LoginDtoReq;
 import com.exercie.exercies.dto.request.UserDtoReq;
 import com.exercie.exercies.dto.response.CommonResponse;
+import com.exercie.exercies.dto.response.LoginDtoRes;
 import com.exercie.exercies.dto.response.UserDtoRes;
-import com.exercie.exercies.model.User;
 import com.exercie.exercies.service.AuthService;
 import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
@@ -12,9 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -52,4 +51,10 @@ public class AuthController {
         return CommonResponse.generateResponse(userDtoReq, "success", HttpStatus.CREATED);
     }
 
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@Valid @RequestBody LoginDtoReq loginDtoReq){
+        LoginDtoRes loginDtoRes = authService.loginUser(loginDtoReq);
+        return CommonResponse.generateResponse(loginDtoRes, "success", HttpStatus.OK);
+    }
 }

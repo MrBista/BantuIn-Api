@@ -1,13 +1,18 @@
 package com.exercie.exercies.security;
 
+import com.exercie.exercies.service.UserRoleService;
+import com.exercie.exercies.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,43 +27,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class WebSecurityConfig {
 
-    private final UserDetailsServiceImpl userDetailsService;
-
-
-
+    private final UsernameEmailPasswordProvider usernameEmailPasswordProvider;
 
     @Autowired
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
-
-
-    @Bean
-    public AuthenticationProvider daoAuthenticationProvider(){
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        authenticationProvider.setUserDetailsService(userDetailsService);
-
-
-        return authenticationProvider;
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+    public WebSecurityConfig(UsernameEmailPasswordProvider usernameEmailPasswordProvider) {
+        this.usernameEmailPasswordProvider = usernameEmailPasswordProvider;
     }
 
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(){
+        return new ProviderManager(usernameEmailPasswordProvider);
     }
 
-    @Bean
-    public AuthJwtTokenFilter authJwtTokenFilter(){
-        return new AuthJwtTokenFilter();
-    }
+//    @Bean
+//    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+//        AuthenticationManagerBuilder authManagerBuilder =
+//                http.getSharedObject(AuthenticationManagerBuilder.class);
+//        authManagerBuilder.authenticationProvider(usernameEmailPasswordProvider);
+//        return authManagerBuilder.build();
+//    }
 
 
     @Bean
@@ -74,8 +62,7 @@ public class WebSecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
 
-        httpSecurity.authenticationProvider(daoAuthenticationProvider());
-        httpSecurity.addFilterBefore(authJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.authenticationProvider(usernameEmailPasswordProvider);
         return httpSecurity.build();
     }
 }

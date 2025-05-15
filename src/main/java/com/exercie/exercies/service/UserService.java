@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -36,5 +37,12 @@ public class UserService {
         userDaoImpl.saveUser(user);
 
         userDtoReq.setId(user.getId());
+    }
+
+
+    public Optional<User> findUserByIdentifier(String identifier){
+
+        return userDaoImpl
+                .findByUsernameOrEmail(identifier, identifier);
     }
 }
