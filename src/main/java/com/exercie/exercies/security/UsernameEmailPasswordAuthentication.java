@@ -1,14 +1,22 @@
 package com.exercie.exercies.security;
 
+import com.exercie.exercies.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.security.Principal;
 import java.util.Collection;
 
 public class UsernameEmailPasswordAuthentication extends AbstractAuthenticationToken {
     private Object principal;
     private Object credentials;
+
+    Logger log = LoggerFactory.getLogger(UsernameEmailPasswordProvider.class);
 
     public UsernameEmailPasswordAuthentication(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
         // untuk authrorize / ketika user sudah login
@@ -21,6 +29,7 @@ public class UsernameEmailPasswordAuthentication extends AbstractAuthenticationT
     public UsernameEmailPasswordAuthentication(Object principal, Object credentials){
         // untuk login / authenticate user
         super(AuthorityUtils.NO_AUTHORITIES);
+        log.info("masuk sini dengan principle dan credential {}{}", principal, credentials);
         this.principal = principal;
         this.credentials = credentials;
         setAuthenticated(false);
@@ -37,6 +46,15 @@ public class UsernameEmailPasswordAuthentication extends AbstractAuthenticationT
     @Override
     public Object getPrincipal() {
         return this.principal;
+    }
+
+    @Override
+    public String getName() {
+        Object var2 = this.getPrincipal();
+        if (var2 instanceof User userDetails) {
+            return userDetails.getUsername();
+        }
+        return var2.toString();
     }
 
     @Override

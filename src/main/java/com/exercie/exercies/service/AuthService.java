@@ -11,6 +11,7 @@ import com.exercie.exercies.model.User;
 import com.exercie.exercies.model.UserRole;
 import com.exercie.exercies.repository.UserRepository;
 import com.exercie.exercies.repository.UserRoleRepository;
+import com.exercie.exercies.security.JwtTokenService;
 import com.exercie.exercies.security.UsernameEmailPasswordAuthentication;
 import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
@@ -44,17 +45,20 @@ public class AuthService {
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
 
+    private final JwtTokenService jwtTokenService;
+
     private final UserService userService;
     private final UserRoleService userRoleService;
 
     private final AuthenticationManager authenticationManager;
 
     @Autowired
-    public AuthService(@Qualifier("userDaoImpl") UserDaoImpl userDaoImpl, UserMapper userMapper, UserRepository userRepository, UserRoleRepository userRoleRepository, UserService userService, UserRoleService userRoleService, AuthenticationManager authenticationManager) {
+    public AuthService(@Qualifier("userDaoImpl") UserDaoImpl userDaoImpl, UserMapper userMapper, UserRepository userRepository, UserRoleRepository userRoleRepository, JwtTokenService jwtTokenService, UserService userService, UserRoleService userRoleService, AuthenticationManager authenticationManager) {
         this.userDaoImpl = userDaoImpl;
         this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
+        this.jwtTokenService = jwtTokenService;
         this.userService = userService;
         this.userRoleService = userRoleService;
         this.authenticationManager = authenticationManager;
@@ -118,8 +122,9 @@ public class AuthService {
 
         // disini validasi authenticateion terjadi yang kedaftar adalah UsernameEmailPasswordAuthentication
         // nanti kedepannya kita akan nambah via otp
+        logger.info("sebelum authenticate");
         Authentication authentication = authenticationManager.authenticate(unauthenticatedToken);
-
+        logger.info("setelah authenticate");
         String token = "ini nanti token";
         contextHolder.setAuthentication(authentication);
 
@@ -127,11 +132,13 @@ public class AuthService {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
 
+        String tokenGenerated = jwtTokenService.generateToken(authentication);
+
         LoginDtoRes loginDtoRes = new LoginDtoRes();
 
         loginDtoRes.setIdentifier(authentication.getName());
         loginDtoRes.setRoles(roles);
-        loginDtoRes.setToken(token);
+        loginDtoRes.setToken(tokenGenerated);
         return loginDtoRes;
     }
 }

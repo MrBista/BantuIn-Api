@@ -40,7 +40,7 @@ public class UsernameEmailPasswordProvider implements AuthenticationProvider {
             String identifier = authenticationDetail.getName();
             String password = authenticationDetail.getCredentials().toString();
 
-
+            log.info("masuk provider dengan identifier authenticate {}", identifier);
             User user = userService.
                     findUserByIdentifier(identifier)
                     .orElseThrow(() -> new BadCredentialsException("username/password is wrong"));
@@ -69,6 +69,8 @@ public class UsernameEmailPasswordProvider implements AuthenticationProvider {
 
         return null;
     }
+
+
 
     @Override
     public boolean supports(Class<?> authentication) {

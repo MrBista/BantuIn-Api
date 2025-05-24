@@ -20702,3 +20702,78 @@ kotlin.UninitializedPropertyAccessException: lateinit property myPopup has not b
 2025-05-15 16:32:01,920 [10124008] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 13 >= 13
 2025-05-15 16:33:25,833 [10207921] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 13 >= 13
 2025-05-15 16:33:25,834 [10207922] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 13 >= 13
+2025-05-15 16:42:23,033 [10745121]   WARN - #c.i.o.v.i.LineStatusTrackerManager - Tracker is being held on dispose by EditorImpl[file:///home/mrbista/Documents/RoadToBackendDev/spring-boot/project/e-commerce-project/src/main/java/com/exercie/exercies/security/WebSecurityConfig.java]; file: /home/mrbista/Documents/RoadToBackendDev/spring-boot/project/e-commerce-project/src/main/java/com/exercie/exercies/security/WebSecurityConfig.java
+WARN: Cannot load /home/mrbista/.local/share/JetBrains/IdeaIC2024.3/clouds-docker-impl/lib/clouds-docker-impl.jar
+java.io.IOException: /home/mrbista/.local/share/JetBrains/IdeaIC2024.3/clouds-docker-impl/lib/clouds-docker-impl.jar
+	at com.intellij.util.lang.ImmutableZipFile.load(ImmutableZipFile.java:78)
+	at com.intellij.util.lang.ImmutableZipFile.load(ImmutableZipFile.java:48)
+	at com.intellij.util.lang.ZipFile.load(ZipFile.java:49)
+	at com.intellij.platform.ide.bootstrap.ZipFilePoolImpl.load$lambda$1(ZipFilePoolImpl.kt:38)
+	at com.intellij.platform.ide.bootstrap.ZipFilePoolImpl.load$lambda$2(ZipFilePoolImpl.kt:37)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at com.intellij.platform.ide.bootstrap.ZipFilePoolImpl.load(ZipFilePoolImpl.kt:37)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadDescriptorFromJar(PluginDescriptorLoader.kt:148)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadFromPluginDir(PluginDescriptorLoader.kt:283)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadDescriptorFromFileOrDir(PluginDescriptorLoader.kt:236)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadDescriptorFromFileOrDir$default(PluginDescriptorLoader.kt:224)
+	at com.intellij.ide.plugins.PluginDescriptorLoader$loadDescriptorsFromDir$1$1$1.invokeSuspend(PluginDescriptorLoader.kt:1218)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+	at kotlinx.coroutines.internal.SoftLimitedDispatcher$Worker.run(SoftLimitedDispatcher.kt:125)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:99)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:608)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:873)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:763)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:750)
+Caused by: java.util.zip.ZipException: Archive is not a ZIP archive
+	at com.intellij.util.lang.ImmutableZipFile.populateFromCentralDirectory(ImmutableZipFile.java:203)
+	at com.intellij.util.lang.ImmutableZipFile.load(ImmutableZipFile.java:75)
+	... 19 more
+2025-05-24 15:27:38,544 [    168]   WARN - #c.i.i.p.PluginManager - Problems found loading plugins:
+  File '~/.local/share/JetBrains/IdeaIC2024.3/clouds-docker-impl/lib/clouds-docker-impl.jar' contains invalid plugin descriptor
+2025-05-24 15:27:38,958 [    582]   WARN - c.i.o.u.r.overrides - Conflicting registry key definition for key kotlin.mpp.tests.force.gradle: it was defined by plugin org.jetbrains.kotlin but redefined by plugin org.jetbrains.kotlin. Consider adding overrides="true" for one of the plugins, see the documentation for com.intellij.openapi.util.registry.RegistryKeyBean.overrides for more details.
+2025-05-24 15:27:39,393 [   1017]   WARN - #c.i.i.s.p.i.BundledSharedIndexProvider - Bundled shared index is not found at: /opt/idea/jdk-shared-indexes
+2025-05-24 15:27:40,654 [   2278]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=org.jetbrains.kotlin.idea.search.refIndex.KotlinCompilerReferenceIndexService, plugin=org.jetbrains.kotlin)
+2025-05-24 15:27:40,654 [   2278]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.project.MavenProjectsManagerEx, plugin=org.jetbrains.idea.maven)
+2025-05-24 15:27:40,655 [   2279]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.navigator.MavenProjectsNavigator, plugin=org.jetbrains.idea.maven)
+2025-05-24 15:27:40,655 [   2279]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.tasks.MavenShortcutsManager, plugin=org.jetbrains.idea.maven)
+2025-05-24 15:27:40,655 [   2279]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=com.jetbrains.rdserver.toolWindow.BackendServerToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 15:27:40,656 [   2280]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.users.BackendUserManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 15:27:40,656 [   2280]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.ports.CwmPortForwardingToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 15:27:40,656 [   2280]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.following.FollowMeManagerService, plugin=com.jetbrains.codeWithMe)
+2025-05-24 15:27:43,884 [   5508]   WARN - #c.i.u.Alarm - Do not create alarm without coroutineScope: com.intellij.ui.GotItTooltip.<init>(GotItTooltip.kt:94)
+2025-05-24 15:27:44,375 [   5999]   WARN - #c.i.o.a.i.ActionUpdater - 3962 ms total to grab EDT 5 times to expand ToolWindowHeader$2#expandGroup@ToolwindowTitle (com.intellij.toolWindow.ToolWindowHeader$2). Use `ActionUpdateThread.BGT`.
+2025-05-24 17:03:05,295 [5726919] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 13 >= 13
+2025-05-24 17:03:05,296 [5726920] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 13 >= 13
+2025-05-24 17:11:03,280 [6204904]   WARN - #c.i.o.v.i.h.RemoteFileInfoImpl - Virtual local file not found for /home/mrbista/.cache/JetBrains/IdeaIC2024.3/httpFileSystem/catalog.json
+2025-05-24 17:21:47,483 [6849107]   WARN - org.apache.velocity.deprecation - configuration key 'resource.loader' has been deprecated in favor of 'resource.loaders'
+2025-05-24 17:21:47,484 [6849108]   WARN - org.apache.velocity.deprecation - configuration key 'includes.resource.loader.instance' has been deprecated in favor of 'resource.loader.includes.instance'
+2025-05-24 17:25:23,338 [7064962]   WARN - #c.i.u.Alarm - Do not create alarm without coroutineScope: com.intellij.codeInsight.navigation.BackgroundUpdaterTaskBase.<init>(BackgroundUpdaterTaskBase.java:34)
+2025-05-24 17:26:08,312 [7109936]   WARN - org.apache.velocity.deprecation - configuration key 'resource.loader' has been deprecated in favor of 'resource.loaders'
+2025-05-24 17:26:08,312 [7109936]   WARN - org.apache.velocity.deprecation - configuration key 'includes.resource.loader.class' has been deprecated in favor of 'resource.loader.includes.class'
+2025-05-24 17:51:14,067 [8615691]   WARN - #c.i.u.Alarm - Do not create alarm without coroutineScope: com.intellij.codeInsight.hint.ParameterInfoControllerBase.<init>(ParameterInfoControllerBase.java:63)
+2025-05-24 17:53:26,603 [8748227] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 11 >= 11
+2025-05-24 17:53:26,604 [8748228] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 11 >= 11
+2025-05-24 17:55:07,641 [8849265] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 20 >= 20
+2025-05-24 17:55:07,641 [8849265] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 20 >= 20
+2025-05-24 17:56:43,588 [8945212]   WARN - #c.i.u.i.FilteredIcon - Do not create FilteredIcon for EmptyIcon
+2025-05-24 17:56:43,610 [8945234]   WARN - #c.i.u.Alarm - Do not create alarm without coroutineScope: com.intellij.find.impl.FindPopupPanel.initComponents(FindPopupPanel.java:725)
+2025-05-24 17:57:27,433 [8989057]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=org.jetbrains.kotlin.idea.search.refIndex.KotlinCompilerReferenceIndexService, plugin=org.jetbrains.kotlin)
+2025-05-24 17:57:27,434 [8989058]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.project.MavenProjectsManagerEx, plugin=org.jetbrains.idea.maven)
+2025-05-24 17:57:27,434 [8989058]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.navigator.MavenProjectsNavigator, plugin=org.jetbrains.idea.maven)
+2025-05-24 17:57:27,434 [8989058]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.tasks.MavenShortcutsManager, plugin=org.jetbrains.idea.maven)
+2025-05-24 17:57:27,434 [8989058]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=com.jetbrains.rdserver.toolWindow.BackendServerToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 17:57:27,434 [8989058]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.users.BackendUserManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 17:57:27,434 [8989058]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.ports.CwmPortForwardingToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 17:57:27,434 [8989058]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.following.FollowMeManagerService, plugin=com.jetbrains.codeWithMe)
+Opening in existing browser session.
+2025-05-24 18:06:51,739 [9553363]   WARN - #o.j.j.d.IdeaDecompiler - Inconsistent references to the class 'io/jsonwebtoken/security/Keys$1' which is supposed to be anonymous
+2025-05-24 18:06:51,811 [9553435]   WARN - #o.j.j.d.IdeaDecompiler - Inconsistent references to the class 'io/jsonwebtoken/security/Keys$1' which is supposed to be anonymous
+2025-05-24 18:11:25,879 [9827503]   WARN - #c.i.u.Alarm - Do not create alarm without coroutineScope: com.intellij.codeInsight.hint.ParameterInfoControllerBase.<init>(ParameterInfoControllerBase.java:63)
+2025-05-24 18:23:18,032 [10539656]   WARN - #c.i.u.Alarm - Do not create alarm without coroutineScope: com.intellij.codeInsight.hint.ParameterInfoControllerBase.<init>(ParameterInfoControllerBase.java:63)
+2025-05-24 18:43:52,487 [11774111] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 16 >= 16
+2025-05-24 18:43:52,488 [11774112] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 16 >= 16
+2025-05-24 18:45:18,895 [11860519] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 16 >= 16
+2025-05-24 18:45:18,895 [11860519] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 16 >= 16
+2025-05-24 18:48:05,393 [12027017] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 16 >= 16
+2025-05-24 18:48:05,394 [12027018] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 16 >= 16

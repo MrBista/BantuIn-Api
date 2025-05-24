@@ -1,6 +1,11 @@
 server:
   port: 9000
 
+app:
+  jwt:
+    secret: "YourBase64EncodedSecretThatIsAtLeast64BytesLongWhenDecodedFromBase64Format=="
+    expiration-ms: "86400000"
+
 spring:
   application:
     name: "exercies"

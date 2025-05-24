@@ -1,5 +1,7 @@
 package com.exercie.exercies.security;
 
+import com.exercie.exercies.exception.ForbiddenHandler;
+import com.exercie.exercies.exception.NotAuthenticationEntryPoint;
 import com.exercie.exercies.service.UserRoleService;
 import com.exercie.exercies.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,10 +30,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
 
     private final UsernameEmailPasswordProvider usernameEmailPasswordProvider;
+    private final ForbiddenHandler forbiddenHandler;
+    private final NotAuthenticationEntryPoint notAuthenticationEntryPoint;
 
     @Autowired
-    public WebSecurityConfig(UsernameEmailPasswordProvider usernameEmailPasswordProvider) {
+    public WebSecurityConfig(UsernameEmailPasswordProvider usernameEmailPasswordProvider, ForbiddenHandler forbiddenHandler, NotAuthenticationEntryPoint notAuthenticationEntryPoint) {
         this.usernameEmailPasswordProvider = usernameEmailPasswordProvider;
+        this.forbiddenHandler = forbiddenHandler;
+        this.notAuthenticationEntryPoint = notAuthenticationEntryPoint;
     }
 
 
@@ -48,20 +54,30 @@ public class WebSecurityConfig {
 //        return authManagerBuilder.build();
 //    }
 
+    @Bean
+    public AuthJwtTokenFilter authJwtTokenFilter(){
+        return new AuthJwtTokenFilter();
+    }
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .exceptionHandling(exceptions -> exceptions
+                        .accessDeniedHandler(forbiddenHandler)
+                        .authenticationEntryPoint(notAuthenticationEntryPoint)
+                )
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->  auth
                         .requestMatchers("/api/v1/auth/login").permitAll()
                         .requestMatchers("/api/v1/auth/register").permitAll()
-                        .requestMatchers("/api/v1/products/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
 
+
+        httpSecurity.addFilterBefore(authJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         httpSecurity.authenticationProvider(usernameEmailPasswordProvider);
         return httpSecurity.build();
     }
