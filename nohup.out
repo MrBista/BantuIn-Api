@@ -20777,3 +20777,236 @@ Opening in existing browser session.
 2025-05-24 18:45:18,895 [11860519] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 16 >= 16
 2025-05-24 18:48:05,393 [12027017] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 16 >= 16
 2025-05-24 18:48:05,394 [12027018] SEVERE - com.jediterm.terminal.model.TerminalTextBuffer - Attempt to get line out of bounds: 16 >= 16
+2025-05-24 18:50:38,118 [12179742]   WARN - #c.i.o.v.ExternallyAddedFilesProcessorImpl - Cannot find project config directory for non-default and non-directory based project e-commerce-project
+2025-05-24 18:50:41,132 [12182756]   WARN - #o.j.i.maven - updateAllMavenProjects started: incremental=true, MavenProjectAware.reloadProject, sync all e-commerce-project
+2025-05-24 18:50:41,254 [12182878]   WARN - #o.j.i.maven - updateAllMavenProjects finished: incremental=true, MavenProjectAware.reloadProject, sync all e-commerce-project
+2025-05-24 18:50:43,840 [12185464]   WARN - #c.i.o.v.ExternallyAddedFilesProcessorImpl - Cannot find project config directory for non-default and non-directory based project e-commerce-project
+WARN: Cannot load /home/mrbista/.local/share/JetBrains/IdeaIC2024.3/clouds-docker-impl/lib/clouds-docker-impl.jar
+java.io.IOException: /home/mrbista/.local/share/JetBrains/IdeaIC2024.3/clouds-docker-impl/lib/clouds-docker-impl.jar
+	at com.intellij.util.lang.ImmutableZipFile.load(ImmutableZipFile.java:78)
+	at com.intellij.util.lang.ImmutableZipFile.load(ImmutableZipFile.java:48)
+	at com.intellij.util.lang.ZipFile.load(ZipFile.java:49)
+	at com.intellij.platform.ide.bootstrap.ZipFilePoolImpl.load$lambda$1(ZipFilePoolImpl.kt:38)
+	at com.intellij.platform.ide.bootstrap.ZipFilePoolImpl.load$lambda$2(ZipFilePoolImpl.kt:37)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at com.intellij.platform.ide.bootstrap.ZipFilePoolImpl.load(ZipFilePoolImpl.kt:37)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadDescriptorFromJar(PluginDescriptorLoader.kt:148)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadFromPluginDir(PluginDescriptorLoader.kt:283)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadDescriptorFromFileOrDir(PluginDescriptorLoader.kt:236)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadDescriptorFromFileOrDir$default(PluginDescriptorLoader.kt:224)
+	at com.intellij.ide.plugins.PluginDescriptorLoader$loadDescriptorsFromDir$1$1$1.invokeSuspend(PluginDescriptorLoader.kt:1218)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+	at kotlinx.coroutines.internal.SoftLimitedDispatcher$Worker.run(SoftLimitedDispatcher.kt:125)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:99)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:608)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:873)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:763)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:750)
+Caused by: java.util.zip.ZipException: Archive is not a ZIP archive
+	at com.intellij.util.lang.ImmutableZipFile.populateFromCentralDirectory(ImmutableZipFile.java:203)
+	at com.intellij.util.lang.ImmutableZipFile.load(ImmutableZipFile.java:75)
+	... 19 more
+2025-05-24 23:41:17,293 [    158]   WARN - #c.i.i.p.PluginManager - Problems found loading plugins:
+  File '~/.local/share/JetBrains/IdeaIC2024.3/clouds-docker-impl/lib/clouds-docker-impl.jar' contains invalid plugin descriptor
+2025-05-24 23:41:17,714 [    579]   WARN - c.i.o.u.r.overrides - Conflicting registry key definition for key kotlin.mpp.tests.force.gradle: it was defined by plugin org.jetbrains.kotlin but redefined by plugin org.jetbrains.kotlin. Consider adding overrides="true" for one of the plugins, see the documentation for com.intellij.openapi.util.registry.RegistryKeyBean.overrides for more details.
+2025-05-24 23:41:18,066 [    931]   WARN - #c.i.i.s.p.i.BundledSharedIndexProvider - Bundled shared index is not found at: /opt/idea/jdk-shared-indexes
+2025-05-24 23:41:19,389 [   2254]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=org.jetbrains.kotlin.idea.search.refIndex.KotlinCompilerReferenceIndexService, plugin=org.jetbrains.kotlin)
+2025-05-24 23:41:19,389 [   2254]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.project.MavenProjectsManagerEx, plugin=org.jetbrains.idea.maven)
+2025-05-24 23:41:19,389 [   2254]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.navigator.MavenProjectsNavigator, plugin=org.jetbrains.idea.maven)
+2025-05-24 23:41:19,389 [   2254]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.tasks.MavenShortcutsManager, plugin=org.jetbrains.idea.maven)
+2025-05-24 23:41:19,389 [   2254]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=com.jetbrains.rdserver.toolWindow.BackendServerToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 23:41:19,390 [   2255]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.users.BackendUserManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 23:41:19,390 [   2255]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.ports.CwmPortForwardingToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 23:41:19,390 [   2255]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.following.FollowMeManagerService, plugin=com.jetbrains.codeWithMe)
+2025-05-24 23:42:08,740 [  51605]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=org.jetbrains.kotlin.idea.search.refIndex.KotlinCompilerReferenceIndexService, plugin=org.jetbrains.kotlin)
+2025-05-24 23:42:08,740 [  51605]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.project.MavenProjectsManagerEx, plugin=org.jetbrains.idea.maven)
+2025-05-24 23:42:08,740 [  51605]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.navigator.MavenProjectsNavigator, plugin=org.jetbrains.idea.maven)
+2025-05-24 23:42:08,740 [  51605]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.tasks.MavenShortcutsManager, plugin=org.jetbrains.idea.maven)
+2025-05-24 23:42:08,740 [  51605]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=com.jetbrains.rdserver.toolWindow.BackendServerToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 23:42:08,740 [  51605]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.users.BackendUserManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 23:42:08,740 [  51605]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.ports.CwmPortForwardingToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-24 23:42:08,740 [  51605]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.following.FollowMeManagerService, plugin=com.jetbrains.codeWithMe)
+2025-05-24 23:42:08,750 [  51615]   WARN - #o.j.j.d.IdeaDecompiler - Inconsistent references to the class 'io/jsonwebtoken/security/Keys$1' which is supposed to be anonymous
+2025-05-24 23:42:09,045 [  51910]   WARN - #o.j.j.d.IdeaDecompiler - Inconsistent references to the class 'io/jsonwebtoken/security/Keys$1' which is supposed to be anonymous [org/springframework/security/authentication/AbstractAuthenticationToken]
+2025-05-24 23:42:09,200 [  52065]   WARN - #c.i.u.Alarm - Do not create alarm without coroutineScope: com.intellij.ui.GotItTooltip.<init>(GotItTooltip.kt:94)
+2025-05-24 23:42:09,506 [  52371]   WARN - #o.j.i.maven - MavenProjectsTree is inconsistent
+2025-05-24 23:42:09,512 [  52377]   WARN - #o.j.i.maven - updateAllMavenProjects started: incremental=false, MavenProjectsManager.onProjectStartup e-commerce-project
+2025-05-24 23:42:15,706 [  58571]   WARN - #o.j.i.maven - updateAllMavenProjects finished: incremental=false, MavenProjectsManager.onProjectStartup e-commerce-project
+WARN: Cannot load /home/mrbista/.local/share/JetBrains/IdeaIC2024.3/clouds-docker-impl/lib/clouds-docker-impl.jar
+java.io.IOException: /home/mrbista/.local/share/JetBrains/IdeaIC2024.3/clouds-docker-impl/lib/clouds-docker-impl.jar
+	at com.intellij.util.lang.ImmutableZipFile.load(ImmutableZipFile.java:78)
+	at com.intellij.util.lang.ImmutableZipFile.load(ImmutableZipFile.java:48)
+	at com.intellij.util.lang.ZipFile.load(ZipFile.java:49)
+	at com.intellij.platform.ide.bootstrap.ZipFilePoolImpl.load$lambda$1(ZipFilePoolImpl.kt:38)
+	at com.intellij.platform.ide.bootstrap.ZipFilePoolImpl.load$lambda$2(ZipFilePoolImpl.kt:37)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at com.intellij.platform.ide.bootstrap.ZipFilePoolImpl.load(ZipFilePoolImpl.kt:37)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadDescriptorFromJar(PluginDescriptorLoader.kt:148)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadFromPluginDir(PluginDescriptorLoader.kt:283)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadDescriptorFromFileOrDir(PluginDescriptorLoader.kt:236)
+	at com.intellij.ide.plugins.PluginDescriptorLoader.loadDescriptorFromFileOrDir$default(PluginDescriptorLoader.kt:224)
+	at com.intellij.ide.plugins.PluginDescriptorLoader$loadDescriptorsFromDir$1$1$1.invokeSuspend(PluginDescriptorLoader.kt:1218)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+	at kotlinx.coroutines.internal.SoftLimitedDispatcher$Worker.run(SoftLimitedDispatcher.kt:125)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:99)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:608)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:873)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:763)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:750)
+Caused by: java.util.zip.ZipException: Archive is not a ZIP archive
+	at com.intellij.util.lang.ImmutableZipFile.populateFromCentralDirectory(ImmutableZipFile.java:203)
+	at com.intellij.util.lang.ImmutableZipFile.load(ImmutableZipFile.java:75)
+	... 19 more
+2025-05-25 12:51:43,352 [    109]   WARN - #c.i.i.p.PluginManager - Problems found loading plugins:
+  File '~/.local/share/JetBrains/IdeaIC2024.3/clouds-docker-impl/lib/clouds-docker-impl.jar' contains invalid plugin descriptor
+2025-05-25 12:51:43,758 [    515]   WARN - c.i.o.u.r.overrides - Conflicting registry key definition for key kotlin.mpp.tests.force.gradle: it was defined by plugin org.jetbrains.kotlin but redefined by plugin org.jetbrains.kotlin. Consider adding overrides="true" for one of the plugins, see the documentation for com.intellij.openapi.util.registry.RegistryKeyBean.overrides for more details.
+2025-05-25 12:51:44,200 [    957]   WARN - #c.i.i.s.p.i.BundledSharedIndexProvider - Bundled shared index is not found at: /opt/idea/jdk-shared-indexes
+2025-05-25 12:51:45,339 [   2096]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=org.jetbrains.kotlin.idea.search.refIndex.KotlinCompilerReferenceIndexService, plugin=org.jetbrains.kotlin)
+2025-05-25 12:51:45,340 [   2097]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.project.MavenProjectsManagerEx, plugin=org.jetbrains.idea.maven)
+2025-05-25 12:51:45,340 [   2097]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.navigator.MavenProjectsNavigator, plugin=org.jetbrains.idea.maven)
+2025-05-25 12:51:45,340 [   2097]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=org.jetbrains.idea.maven.tasks.MavenShortcutsManager, plugin=org.jetbrains.idea.maven)
+2025-05-25 12:51:45,340 [   2097]   WARN - #c.i.s.ComponentManagerImpl - `preload=NOT_HEADLESS` must be used only for core services (service=com.jetbrains.rdserver.toolWindow.BackendServerToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-25 12:51:45,340 [   2097]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.users.BackendUserManager, plugin=com.jetbrains.codeWithMe)
+2025-05-25 12:51:45,340 [   2097]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.ports.CwmPortForwardingToolWindowManager, plugin=com.jetbrains.codeWithMe)
+2025-05-25 12:51:45,341 [   2098]   WARN - #c.i.s.ComponentManagerImpl - `preload=TRUE` must be used only for core services (service=com.intellij.cwm.plugin.following.FollowMeManagerService, plugin=com.jetbrains.codeWithMe)
+2025-05-25 12:51:45,979 [   2736]   WARN - #o.j.j.d.IdeaDecompiler - Inconsistent references to the class 'io/jsonwebtoken/security/Keys$1' which is supposed to be anonymous
+2025-05-25 12:51:47,799 [   4556]   WARN - #c.i.u.Alarm - Do not create alarm without coroutineScope: com.intellij.ui.GotItTooltip.<init>(GotItTooltip.kt:94)
+2025-05-25 12:52:01,287 [  18044]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 5
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 12:52:01,288 [  18045]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 5
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:22:55,369 [1872126]   WARN - org.apache.velocity.deprecation - configuration key 'resource.loader' has been deprecated in favor of 'resource.loaders'
+2025-05-25 13:22:55,371 [1872128]   WARN - org.apache.velocity.deprecation - configuration key 'includes.resource.loader.instance' has been deprecated in favor of 'resource.loader.includes.instance'
+2025-05-25 13:23:46,045 [1922802]   WARN - org.apache.velocity.deprecation - configuration key 'resource.loader' has been deprecated in favor of 'resource.loaders'
+2025-05-25 13:23:46,046 [1922803]   WARN - org.apache.velocity.deprecation - configuration key 'includes.resource.loader.class' has been deprecated in favor of 'resource.loader.includes.class'
+2025-05-25 13:24:44,706 [1981463]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 5
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:24:44,706 [1981463]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 5
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:27:33,212 [2149969]   WARN - #c.i.u.Alarm - Do not create alarm without coroutineScope: com.intellij.codeInsight.hint.ParameterInfoControllerBase.<init>(ParameterInfoControllerBase.java:63)
+2025-05-25 13:28:35,916 [2212673]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 5
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:28:35,917 [2212674]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 5
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:29:41,465 [2278222]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 4
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:29:41,466 [2278223]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 4
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:29:45,004 [2281761]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 4
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:29:45,004 [2281761]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 4
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:29:45,557 [2282314]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 5
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-05-25 13:29:45,557 [2282314]   WARN - sun.awt.X11.XToolkit - Exception on Toolkit thread
+java.lang.IllegalArgumentException: Nonexistent button 5
+	at java.desktop/java.awt.event.MouseEvent.<init>(MouseEvent.java:774)
+	at java.desktop/sun.awt.X11.XWindow.handleButtonPressRelease(XWindow.java:765)
+	at java.desktop/sun.awt.X11.XContentWindow.handleButtonPressRelease(XContentWindow.java:45)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchEvent(XBaseWindow.java:1206)
+	at java.desktop/sun.awt.X11.XBaseWindow.dispatchToWindow(XBaseWindow.java:1178)
+	at java.desktop/sun.awt.X11.XToolkit.dispatchEvent(XToolkit.java:917)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:1064)
+	at java.desktop/sun.awt.X11.XToolkit.run(XToolkit.java:946)
+	at java.base/java.lang.Thread.run(Thread.java:1583)

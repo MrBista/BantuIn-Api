@@ -5,6 +5,10 @@ app:
   jwt:
     secret: "YourBase64EncodedSecretThatIsAtLeast64BytesLongWhenDecodedFromBase64Format=="
     expiration-ms: "86400000"
+  cors:
+    allowed-origins:
+      - http://localhost:8080
+      - http://localhost:8081
 
 spring:
   application:
