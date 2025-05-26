@@ -6,6 +6,7 @@ import com.exercie.exercies.dto.request.LoginDtoReq;
 import com.exercie.exercies.dto.request.UserDtoReq;
 import com.exercie.exercies.dto.response.LoginDtoRes;
 import com.exercie.exercies.dto.response.UserDtoRes;
+import com.exercie.exercies.exception.ResourceNotFoundException;
 import com.exercie.exercies.mapper.UserMapper;
 import com.exercie.exercies.model.User;
 import com.exercie.exercies.model.UserRole;
@@ -52,8 +53,10 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    public AuthService(@Qualifier("userDaoImpl") UserDaoImpl userDaoImpl, UserMapper userMapper, UserRepository userRepository, UserRoleRepository userRoleRepository, JwtTokenService jwtTokenService, UserService userService, UserRoleService userRoleService, AuthenticationManager authenticationManager) {
+    public AuthService(@Qualifier("userDaoImpl") UserDaoImpl userDaoImpl, UserMapper userMapper, UserRepository userRepository, UserRoleRepository userRoleRepository, JwtTokenService jwtTokenService, UserService userService, UserRoleService userRoleService, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
         this.userDaoImpl = userDaoImpl;
         this.userMapper = userMapper;
         this.userRepository = userRepository;
@@ -62,6 +65,7 @@ public class AuthService {
         this.userService = userService;
         this.userRoleService = userRoleService;
         this.authenticationManager = authenticationManager;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<UserDtoRes> getAllUser(){
@@ -73,8 +77,18 @@ public class AuthService {
     }
 
     @Transactional
-    public void createUser(UserDtoReq userDtoReq){
+    public void createUser(UserDtoReq userDtoReq) throws BadRequestException {
+        // cari dulu email / usernamenya udah dipakai belum
+        Optional<User> existingUser = userDaoImpl.findByUsernameOrEmail(userDtoReq.getUsername(), userDtoReq.getEmail());
+
+        if (existingUser.isPresent()) {
+            // Jika ada pengguna dengan username atau email yang sama, lempar exception
+            throw new BadRequestException("Username atau email sudah terdaftar.");
+        }
+
+
         User user = userMapper.toEntity(userDtoReq);
+        user.setPassword(passwordEncoder.encode(userDtoReq.getPassword()));
         userDaoImpl.saveUser(user);
         userDtoReq.setId(user.getId());
     }
@@ -83,7 +97,7 @@ public class AuthService {
         User userDtoRes = userDaoImpl.getUserById(id);
         logger.info("user res {}", userDtoRes);
         if (userDtoRes == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
+            throw new ResourceNotFoundException("User not found");
         }
         return userMapper.toDto(userDtoRes);
     }
@@ -125,7 +139,6 @@ public class AuthService {
         logger.info("sebelum authenticate");
         Authentication authentication = authenticationManager.authenticate(unauthenticatedToken);
         logger.info("setelah authenticate");
-        String token = "ini nanti token";
         contextHolder.setAuthentication(authentication);
 
         Set<String> roles = authentication.getAuthorities().stream()
@@ -134,11 +147,27 @@ public class AuthService {
 
         String tokenGenerated = jwtTokenService.generateToken(authentication);
 
+        User userDetail = (User) authentication.getPrincipal();
+
+
         LoginDtoRes loginDtoRes = new LoginDtoRes();
 
         loginDtoRes.setIdentifier(authentication.getName());
         loginDtoRes.setRoles(roles);
         loginDtoRes.setToken(tokenGenerated);
+        loginDtoRes.setName(userDetail.getName());
+        loginDtoRes.setId(userDetail.getId());
+        loginDtoRes.setEmail(userDetail.getEmail());
+        loginDtoRes.setAvatar("");
         return loginDtoRes;
     }
+
+    @Transactional
+    public void deleteUserById(Long userId) {
+            // ! TODO tambahkan validasi usernya ada apa tidak
+
+            userDaoImpl.deleteUserById(userId);
+    }
+
+
 }

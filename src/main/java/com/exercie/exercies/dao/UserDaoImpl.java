@@ -105,7 +105,23 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void deleteUser(User user) {
+        String query = """
+                DELETE FROM users
+                where 
+                """;
 
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        String query = """
+                DELETE FROM users
+                where id = :userId
+                """;
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", id);
+
+            namedParameterJdbcTemplate.update(query, params);
     }
 
     @Override

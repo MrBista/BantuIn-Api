@@ -11,6 +11,7 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,24 +26,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @GetMapping
-    public ResponseEntity<?> findAllUser(){
-        List<UserDtoRes> data = authService.getAllUser();
 
-        return CommonResponse.generateResponse(data, "Sucessfully get data", HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id")Long  userId){
-        UserDtoRes userDtoRes = authService.getUserById(userId);
-        return CommonResponse.generateResponse(userDtoRes, "success", HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<?> inserUser(@RequestBody UserDtoReq userDtoReq){
-        authService.createUser(userDtoReq);
-        return CommonResponse.generateResponse(userDtoReq, "success", HttpStatus.CREATED);
-    }
 
 
     @PostMapping("/register")

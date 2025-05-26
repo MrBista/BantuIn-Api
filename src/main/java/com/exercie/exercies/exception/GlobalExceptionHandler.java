@@ -3,6 +3,7 @@ package com.exercie.exercies.exception;
 import org.apache.coyote.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.naming.AuthenticationException;
 import java.nio.file.AccessDeniedException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,9 +34,15 @@ public class GlobalExceptionHandler {
         return generateResponseError(e.getMessage(), "Bad request", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DuplicateKeyException.class)
+    public ResponseEntity<?> generateResponseNotFound(DuplicateKeyException e){
+        return generateResponseError("Data already exists.", "Bad request", HttpStatus.BAD_REQUEST);
+    }
+
     private ResponseEntity<?> generateResponseError(Object errors, String message, HttpStatus status){
         Map<String, Object> res = new HashMap<>();
         res.put("errors", errors);
+        res.put("error", errors);
         res.put("message", message);
         res.put("status", status.value());
         return new ResponseEntity<>(res, status);
