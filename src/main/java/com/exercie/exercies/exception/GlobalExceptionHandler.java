@@ -22,29 +22,42 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> generateGeneralError(Exception e){
-        return generateResponseError(e.getMessage(), "something went wrong", HttpStatus.BAD_REQUEST);
+        return generateResponseError(e.getMessage(), "something went wrong", HttpStatus.BAD_REQUEST, "UN_TRACK_ERROR");
     }
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> generateResponseNotFound(Exception e){
-        return generateResponseError(e.getMessage(), "Resources Not Found", HttpStatus.NOT_FOUND);
+        return generateResponseError(e.getMessage(), "Resources Not Found", HttpStatus.NOT_FOUND, "NOT_FOUND_ERROR");
     }
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<?> generateResponseNotFound(BadRequestException e){
-        return generateResponseError(e.getMessage(), "Bad request", HttpStatus.BAD_REQUEST);
+        return generateResponseError(e.getMessage(), "Bad request", HttpStatus.BAD_REQUEST, "VALIDATION_ERROR");
     }
 
     @ExceptionHandler(DuplicateKeyException.class)
     public ResponseEntity<?> generateResponseNotFound(DuplicateKeyException e){
-        return generateResponseError("Data already exists.", "Bad request", HttpStatus.BAD_REQUEST);
+        return generateResponseError("Data already exists.", "Bad request", HttpStatus.BAD_REQUEST, "DB_DUPLICATE_ENTRY_ERROR");
     }
 
     private ResponseEntity<?> generateResponseError(Object errors, String message, HttpStatus status){
         Map<String, Object> res = new HashMap<>();
         res.put("errors", errors);
-        res.put("error", errors);
         res.put("message", message);
         res.put("status", status.value());
+        res.put("success", false);
+        res.put("data", null);
+        return new ResponseEntity<>(res, status);
+    }
+
+    private ResponseEntity<?> generateResponseError(Object errors, String message, HttpStatus status, String errorCode){
+        Map<String, Object> res = new HashMap<>();
+        res.put("errors", errors);
+        res.put("message", message);
+        res.put("status", status.value());
+        res.put("success", false);
+        res.put("data", null);
+        res.put("errorCode", errorCode);
+
         return new ResponseEntity<>(res, status);
     }
 
