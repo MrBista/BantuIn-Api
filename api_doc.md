@@ -35,12 +35,7 @@ All responses follow this standard format:
   "success": true,
   "message": "Request processed successfully",
   "data": {},
-  "errors": null,
-  "meta": {
-    "timestamp": "2025-06-15T10:30:00Z",
-    "version": "1.0",
-    "requestId": "req_123456789"
-  }
+  "errors": null
 }
 ```
 
@@ -66,10 +61,7 @@ Error response format:
   "errors": {
     "fieldName": ["Error message 1", "Error message 2"]
   },
-  "meta": {
-    "timestamp": "2025-06-15T10:30:00Z",
-    "errorCode": "VALIDATION_FAILED"
-  }
+  "errorCode": "VALIDATION_FAILED"
 }
 ```
 
