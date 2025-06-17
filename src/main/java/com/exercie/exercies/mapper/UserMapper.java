@@ -14,7 +14,7 @@ public class UserMapper {
     public UserDtoRes toDto(User user){
         UserDtoRes userDtoRes = new UserDtoRes();
         userDtoRes.setId(user.getId());
-        userDtoRes.setName(user.getName());
+        userDtoRes.setFirstName(user.getName());
         userDtoRes.setEmail(user.getEmail());
         userDtoRes.setUsername(user.getUsername());
         return userDtoRes;
@@ -24,7 +24,7 @@ public class UserMapper {
         User user = new User();
         user.setId(userDtoReq.getId());
         user.setPassword(userDtoReq.getPassword());
-        user.setName(userDtoReq.getName());
+        user.setName(userDtoReq.getFirstName() +" "+ userDtoReq.getLastEmail());
         user.setEmail(userDtoReq.getEmail());
         user.setUsername(userDtoReq.getUsername());
         return user;

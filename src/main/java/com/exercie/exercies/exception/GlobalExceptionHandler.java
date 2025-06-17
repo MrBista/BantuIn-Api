@@ -31,6 +31,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<?> generateResponseNotFound(BadRequestException e){
+
         return generateResponseError(e.getMessage(), "Bad request", HttpStatus.BAD_REQUEST, "VALIDATION_ERROR");
     }
 

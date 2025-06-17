@@ -89,6 +89,7 @@ Register a new customer account (automatically assigned CUSTOMER role).
   "firstName": "John",
   "lastName": "Doe",
   "email": "john.doe@example.com",
+  "username": "basbasbas",
   "password": "SecurePass123!",
   "passwordConfirmation": "SecurePass123!",
   "phoneNumber": "+6281234567890",
@@ -100,6 +101,7 @@ Register a new customer account (automatically assigned CUSTOMER role).
 - `firstName` (string, required) - 2-50 characters
 - `lastName` (string, required) - 2-50 characters
 - `email` (string, required) - Valid email format, unique
+- `username` (string, required) - Valid email format, unique
 - `password` (string, required) - Min 8 characters, must contain uppercase, lowercase, number, and special character
 - `passwordConfirmation` (string, required) - Must match password
 - `phoneNumber` (string, required) - Valid Indonesian phone number
@@ -114,6 +116,7 @@ Content-Type: application/json
   "firstName": "John",
   "lastName": "Doe",
   "email": "john.doe@example.com",
+  "username: "basbasbas",
   "password": "SecurePass123!",
   "passwordConfirmation": "SecurePass123!",
   "phoneNumber": "+6281234567890"
@@ -131,12 +134,12 @@ Content-Type: application/json
       "firstName": "John",
       "lastName": "Doe",
       "email": "john.doe@example.com",
+      "username": "basbasbas",
       "role": "CUSTOMER",
       "isActive": true,
       "emailVerified": false,
       "createdAt": "2025-06-15T10:30:00Z"
-    },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    }
   }
 }
 ```
@@ -150,7 +153,7 @@ Authenticate user and receive access token.
 **Request Body:**
 ```json
 {
-  "email": "john.doe@example.com",
+  "identifier": "john.doe@example.com",
   "password": "SecurePass123!"
 }
 ```

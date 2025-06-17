@@ -1,67 +1,26 @@
 package com.exercie.exercies.dto.response;
 
 import com.exercie.exercies.model.Role;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDtoRes {
     private Long id;
+    private String firstName;
+    private String lastName;
     private String email;
     private String username;
-    private String name;
-
-    private List<Role> roles;
-
-
-    public UserDtoRes() {
-    }
-
-    public UserDtoRes(Long id, String email, String username, String name) {
-        this.id = id;
-        this.email = email;
-        this.username = username;
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDtoRes{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
+    private String role;
+    private Boolean isActive;
+    private Boolean emailVerified;
+    private Date createdAt;
 }

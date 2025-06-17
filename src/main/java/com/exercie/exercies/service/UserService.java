@@ -27,17 +27,22 @@ public class UserService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void saveUser(UserDtoReq userDtoReq){
+        LocalDateTime timeNow = LocalDateTime.now();
+        String name = userDtoReq.getFirstName() + userDtoReq.getLastEmail();
         User user = new User();
-        user.setName(userDtoReq.getName());
+        user.setName(name);
         user.setPassword(passwordEncoder.encode(userDtoReq.getPassword()));
         user.setUsername(userDtoReq.getUsername());
         user.setEmail(userDtoReq.getEmail());
-        user.setCreatedAt(LocalDateTime.now());
+        user.setCreatedAt(timeNow);
 
         userDaoImpl.saveUser(user);
 
         userDtoReq.setId(user.getId());
+        userDtoReq.setCreatedAt(timeNow);
     }
+
+
 
 
     public Optional<User> findUserByIdentifier(String identifier){

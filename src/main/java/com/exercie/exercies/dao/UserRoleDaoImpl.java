@@ -8,9 +8,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRoleDaoImpl implements UserRoleDao{
@@ -42,6 +44,11 @@ public class UserRoleDaoImpl implements UserRoleDao{
     }
 
     @Override
+    public void saveUserRolesBatch() {
+
+    }
+
+    @Override
     public List<UserRole> findByUserId(Long userId) {
         Map<String, Object> params = new HashMap<>();
         params.put("userId", userId);
@@ -63,4 +70,27 @@ public class UserRoleDaoImpl implements UserRoleDao{
         return userRole;
 
     };
+
+
+
+    public int assignRolesToUser(Long userId, List<Long> roleIds) {
+        if (roleIds == null || roleIds.isEmpty()) {
+            return 0;
+        }
+
+        String sql = "INSERT INTO user_roles (user_id, role_id) VALUES (:userId, :roleId)";
+
+        List<Map<String, Object>> batchValues = roleIds.stream()
+                .map(roleId -> {
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("userId", userId);
+                    params.put("roleId", roleId);
+                    return params;
+                })
+                .toList();
+
+        int[] results = namedParameterJdbcTemplate.batchUpdate(sql, batchValues.toArray(new Map[0]));
+        return Arrays.stream(results).sum();
+    }
+
 }

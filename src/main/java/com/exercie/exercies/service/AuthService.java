@@ -2,12 +2,15 @@ package com.exercie.exercies.service;
 
 import com.exercie.exercies.dao.UserDao;
 import com.exercie.exercies.dao.UserDaoImpl;
+import com.exercie.exercies.dao.UserRoleDao;
 import com.exercie.exercies.dto.request.LoginDtoReq;
 import com.exercie.exercies.dto.request.UserDtoReq;
 import com.exercie.exercies.dto.response.LoginDtoRes;
 import com.exercie.exercies.dto.response.UserDtoRes;
 import com.exercie.exercies.exception.ResourceNotFoundException;
+import com.exercie.exercies.helper.RoleName;
 import com.exercie.exercies.mapper.UserMapper;
+import com.exercie.exercies.model.Role;
 import com.exercie.exercies.model.User;
 import com.exercie.exercies.model.UserRole;
 import com.exercie.exercies.repository.UserRepository;
@@ -55,8 +58,10 @@ public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final UserRoleDao userRoleDao;
+
     @Autowired
-    public AuthService(@Qualifier("userDaoImpl") UserDaoImpl userDaoImpl, UserMapper userMapper, UserRepository userRepository, UserRoleRepository userRoleRepository, JwtTokenService jwtTokenService, UserService userService, UserRoleService userRoleService, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
+    public AuthService(@Qualifier("userDaoImpl") UserDaoImpl userDaoImpl, UserMapper userMapper, UserRepository userRepository, UserRoleRepository userRoleRepository, JwtTokenService jwtTokenService, UserService userService, UserRoleService userRoleService, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserRoleDao userRoleDao) {
         this.userDaoImpl = userDaoImpl;
         this.userMapper = userMapper;
         this.userRepository = userRepository;
@@ -66,6 +71,7 @@ public class AuthService {
         this.userRoleService = userRoleService;
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
+        this.userRoleDao = userRoleDao;
     }
 
     public List<UserDtoRes> getAllUser(){
@@ -91,6 +97,17 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(userDtoReq.getPassword()));
         userDaoImpl.saveUser(user);
         userDtoReq.setId(user.getId());
+
+        if (userDtoReq.getRole().isEmpty() || userDtoReq.getRole().isBlank()){
+            throw new BadRequestException("roles must filled");
+        }
+
+
+
+
+        // !TODO tambahkan validasi apakah userrole id ada di db, kalau ga ada maka nanti throw dan buat di service yang beda
+//        userRoleDao.assignRolesToUser(user.getId(), userDtoReq.getRoles());
+
     }
 
     public UserDtoRes getUserById(Long id){
@@ -105,7 +122,7 @@ public class AuthService {
 
 
     @Transactional
-    public void registerUser(UserDtoReq userDtoReq) throws BadRequestException {
+    public UserDtoRes registerUser(UserDtoReq userDtoReq) throws BadRequestException {
         // register user
         // cek dulu email atau username udah ada atau belum
 
@@ -117,13 +134,28 @@ public class AuthService {
            throw new BadRequestException("Username / email already exists !");
        }
 
-        // 1. KALAU SUDAH DI REGISTER USERNYA MAKA INSERT JUGA BAGIAN USER ROLE
+       if (!userDtoReq.getPassword().equals(userDtoReq.getPasswordConfirmation())) {
+           throw new BadRequestException("Password not match");
+       }
 
         userService.saveUser(userDtoReq);
 
         // save user role
         userRoleService.saveUserRole(userDtoReq.getId());
 
+        UserDtoRes userDtoRes = new UserDtoRes();
+
+        userDtoRes.setId(userDtoReq.getId());
+        userDtoRes.setFirstName(userDtoReq.getFirstName());
+        userDtoRes.setLastName(userDtoReq.getFirstName());
+        userDtoRes.setEmail(userDtoReq.getEmail());
+        userDtoRes.setUsername(userDtoReq.getUsername());
+        userDtoRes.setRole(RoleName.CUSTOMER.name());
+        userDtoRes.setIsActive(true);
+//        userDtoRes.setCreatedAt(userDtoRes.getCreatedAt());
+
+
+        return userDtoRes;
     }
 
 
@@ -134,11 +166,10 @@ public class AuthService {
 
         Authentication unauthenticatedToken = new UsernameEmailPasswordAuthentication(loginDtoReq.getIdentifier(), loginDtoReq.getPassword());
 
-        // disini validasi authenticateion terjadi yang kedaftar adalah UsernameEmailPasswordAuthentication
-        // nanti kedepannya kita akan nambah via otp
-        logger.info("sebelum authenticate");
+
         Authentication authentication = authenticationManager.authenticate(unauthenticatedToken);
-        logger.info("setelah authenticate");
+
+
         contextHolder.setAuthentication(authentication);
 
         Set<String> roles = authentication.getAuthorities().stream()
@@ -165,6 +196,9 @@ public class AuthService {
     @Transactional
     public void deleteUserById(Long userId) {
             // ! TODO tambahkan validasi usernya ada apa tidak
+            userDaoImpl
+                    .findById(userId)
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
             userDaoImpl.deleteUserById(userId);
     }

@@ -138,6 +138,24 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
+    public Optional<User> findById(Long id) {
+        String query = """
+                    SELECT id, username, password, email, name  FROM users
+                    where id = :id
+                """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+
+        try {
+            User user = namedParameterJdbcTemplate.queryForObject(query, params, userRowMapper);
+            return Optional.ofNullable(user);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
     public Optional<User> findByUsernameOrEmail(String username, String email) {
         String query = """
                     SELECT id, username, password, email, name  FROM users
